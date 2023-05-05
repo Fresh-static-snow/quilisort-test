@@ -1,20 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Navigation } from './app/navigation';
+import { Provider } from 'react-redux';
+import { store } from './app/redux';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './app/config/tanstackQuery';
+import { css } from './app/styles';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <SafeAreaView style={css.appContainer}>
+          
+          {/* Component's content here */}
+          <Navigation />
+        </SafeAreaView>
+      </QueryClientProvider>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
